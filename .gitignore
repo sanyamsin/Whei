@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Generated outputs (reproducible from pipeline)
+data/processed/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
