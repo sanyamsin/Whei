@@ -82,7 +82,7 @@ whei/
 
 ## Author
 
-**Serge-Alain (Tresor) Nyamsin**  Data Scientist with 12+ years of humanitarian & development field experience in West and Central Africa (EU, ECHO, AFD, UNICEF-funded programs).
+**Serge-Alain Nyamsin**  Data Scientist with 12+ years of humanitarian & development field experience in West and Central Africa (EU, ECHO, AFD, UNICEF-funded programs).
 [GitHub](https://github.com/sanyamsin) · [Hugging Face](https://huggingface.co/Lokozu)
 
 ## License
