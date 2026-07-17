@@ -15,7 +15,7 @@
 
 ## Why this project
 
-Ministries of health and their partners need a single, decomposable signal to **prioritize investments in women's health** — but averages hide inequities, and composite indices are only as credible as their methodology. This project demonstrates a fully transparent, tested, reproducible index pipeline:
+Ministries of health and their partners need a single, decomposable signal to **prioritize investments in women's health** but averages hide inequities, and composite indices are only as credible as their methodology. This project demonstrates a fully transparent, tested, reproducible index pipeline:
 
 - **Health outcomes**: maternal mortality, anemia (women 15–49)
 - **Service coverage**: skilled birth attendance, ANC 4+ visits, modern contraceptive prevalence
@@ -82,7 +82,7 @@ whei/
 
 ## Author
 
-**Serge-Alain (Tresor) Nyamsin**  Data Scientist with 12+ years of humanitarian & development field experience in West and Central Africa (EU, ECHO, AFD, UNICEF-funded programs).
+**Serge-Alain Nyamsin**  Data Scientist with 12+ years of humanitarian & development field experience in West and Central Africa (EU, ECHO, AFD, UNICEF-funded programs).
 [GitHub](https://github.com/sanyamsin) · [Hugging Face](https://huggingface.co/Lokozu)
 
 ## License
