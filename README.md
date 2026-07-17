@@ -55,7 +55,8 @@ python src/download_data.py
 
 ## Methodology in one paragraph
 
-Each indicator is median-imputed (with per-country transparency flags), min-max normalized to 0–100 with direction handling (so 100 always means better equity), then aggregated by weighted arithmetic mean under three weighting schemes. Rank stability across schemes is verified with Spearman correlations  the standard robustness check for composite indices. Full details, correlation structure, and limitations in the [methodology notebook](notebooks/01_methodology.ipynb).
+Each indicator is median-imputed (with per-country transparency flags), min-max normalized to 0–100 with direction handling (so 100 always means better equity), then aggregated by weighted arithmetic mean under three weighting schemes. Rank stability across schemes is verified with Spearman correlations  the standard robustness check for composite indices. Full details, correlation structure, and limitations in the [methodology notebook](notebooks/01_methodology.ipynb). 
+**Data note:** the bundled snapshot contains real values fetched from the World Bank Open Data API (WHO/DHS-derived series), with per-indicator reference years included for transparency. Reference years vary by country and indicator (survey-based series like ANC4+ are less frequent than modelled series like MMR) a documented limitation of latest-available-value indices. Run `python src/download_data.py` to refresh.
 
 ## Project structure
 
