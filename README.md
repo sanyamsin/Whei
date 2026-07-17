@@ -7,7 +7,7 @@
 [![Tests](https://img.shields.io/badge/tests-pytest-green.svg)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**🔗 Live demo:** [Hugging Face Space](https://huggingface.co/spaces/Lokozu/whei) *(update link after deployment)*
+**🔗 Live demo:** [whei.streamlit.app](https://whei.streamlit.app) *(update link after deployment)*
 
 ![WHEI dashboard preview](docs/preview.png)
 
