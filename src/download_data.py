@@ -44,14 +44,26 @@ API_URL = "https://api.worldbank.org/v2/country/{countries}/indicator/{indicator
 
 
 def fetch_indicator(indicator: str, countries: list[str]) -> pd.DataFrame:
-    """Fetch the most recent non-null value of one indicator for each country."""
-    params = {"format": "json", "per_page": 2000, "mrnev": 1}  # most recent non-empty value
+    """Fetch the most recent non-null value of one indicator for each country.
+
+    Tries the efficient `mrnev=1` query first; some indicators (e.g. education
+    series) reject it with HTTP 400, in which case we fall back to fetching
+    2010-2026 and keeping the latest non-null value per country.
+    """
     url = API_URL.format(countries=";".join(countries), indicator=indicator)
+
+    params = {"format": "json", "per_page": 2000, "mrnev": 1}
     resp = requests.get(url, params=params, timeout=30)
+
+    if resp.status_code == 400:  # mrnev not supported -> fallback
+        params = {"format": "json", "per_page": 5000, "date": "2010:2026"}
+        resp = requests.get(url, params=params, timeout=30)
+
     resp.raise_for_status()
     payload = resp.json()
     if len(payload) < 2 or payload[1] is None:
         return pd.DataFrame(columns=["iso3", "country", "value", "year"])
+
     rows = [
         {
             "iso3": item["countryiso3code"],
@@ -62,7 +74,12 @@ def fetch_indicator(indicator: str, countries: list[str]) -> pd.DataFrame:
         for item in payload[1]
         if item["value"] is not None
     ]
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    if df.empty:
+        return df
+    # Keep only the most recent value per country (no-op for mrnev results)
+    df = df.sort_values("year").groupby("iso3", as_index=False).last()
+    return df
 
 
 def build_dataset(countries: list[str]) -> pd.DataFrame:
@@ -70,7 +87,11 @@ def build_dataset(countries: list[str]) -> pd.DataFrame:
     base: pd.DataFrame | None = None
     for code, name in INDICATORS.items():
         print(f"Fetching {name} ({code}) ...")
-        df = fetch_indicator(code, countries)
+        try:
+            df = fetch_indicator(code, countries)
+        except requests.RequestException as exc:
+            print(f"  WARNING: {name} failed ({exc}) — column will be empty")
+            df = pd.DataFrame(columns=["iso3", "country", "value", "year"])
         df = df.rename(columns={"value": name, "year": f"{name}_year"})
         if base is None:
             base = df[["iso3", "country", name, f"{name}_year"]]
